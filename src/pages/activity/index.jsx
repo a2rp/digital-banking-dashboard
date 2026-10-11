@@ -7,7 +7,7 @@ import { downloadCsv } from "../../utils/downloadCsv";
 import { formatDate, formatMoney, formatSignedMoney } from "../../utils/format";
 import styles from "./styles.module.css";
 
-const ActivityPage = ({ accounts, onSelectAccount, onUpdateTransaction, selectedAccountId, transactions }) => {
+const ActivityPage = ({ accounts, onSelectAccount, selectedAccountId, transactions, updateTransaction }) => {
     const [searchParams] = useSearchParams();
     const [query, setQuery] = useState(searchParams.get("search") || "");
     const [statusFilter, setStatusFilter] = useState("All status");
@@ -219,7 +219,7 @@ const ActivityPage = ({ accounts, onSelectAccount, onUpdateTransaction, selected
                         <label className={styles.detailCategory}>
                             <span>Category</span>
                             <select
-                                onChange={(event) => onUpdateTransaction(selectedTransaction.id, { category: event.target.value })}
+                                onChange={(event) => updateTransaction(selectedTransaction.id, { category: event.target.value })}
                                 value={selectedTransaction.category}
                             >
                                 {transactionCategories.map((category) => <option key={category}>{category}</option>)}
@@ -231,7 +231,7 @@ const ActivityPage = ({ accounts, onSelectAccount, onUpdateTransaction, selected
                         </div>
                         <button
                             className={selectedTransaction.reviewed ? styles.reviewedButton : styles.reviewButton}
-                            onClick={() => onUpdateTransaction(selectedTransaction.id, { reviewed: !selectedTransaction.reviewed })}
+                            onClick={() => updateTransaction(selectedTransaction.id, { reviewed: !selectedTransaction.reviewed })}
                             type="button"
                         >
                             {selectedTransaction.reviewed ? "Reviewed" : "Mark as reviewed"}

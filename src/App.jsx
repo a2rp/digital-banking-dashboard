@@ -28,6 +28,7 @@ const App = () => {
                 <Navigation />
                 <AppRoutes
                     banking={banking}
+                    onSelectAccount={setSelectedAccountId}
                     notify={notify}
                     selectedAccountId={selectedAccountId}
                     totalBalance={banking.totalBalance}

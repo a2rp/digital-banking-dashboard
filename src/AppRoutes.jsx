@@ -10,9 +10,9 @@ const CardsPage = lazy(() => import("./pages/cards/index.jsx"));
 const GoalsPage = lazy(() => import("./pages/goals/index.jsx"));
 const NotFoundPage = lazy(() => import("./pages/notFound/index.jsx"));
 
-const AppRoutes = ({ banking, notify, selectedAccountId, totalBalance }) => {
+const AppRoutes = ({ banking, notify, onSelectAccount, selectedAccountId, totalBalance }) => {
     const location = useLocation();
-    const pageProps = { ...banking, notify, selectedAccountId, totalBalance };
+    const pageProps = { ...banking, notify, onSelectAccount, selectedAccountId, totalBalance };
 
     return (
         <>

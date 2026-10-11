@@ -9,7 +9,9 @@ const Dialog = ({ open, title, description, onClose, children, size = "medium" }
     const descriptionId = useId();
     const panelRef = useRef(null);
     const closeRef = useRef(onClose);
-    closeRef.current = onClose;
+    useEffect(() => {
+        closeRef.current = onClose;
+    }, [onClose]);
 
     useEffect(() => {
         if (!open) return undefined;

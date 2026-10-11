@@ -15,6 +15,7 @@ const ActivityPage = ({ accounts, onUpdateTransaction, selectedAccountId, transa
     const [accountFilter, setAccountFilter] = useState(selectedAccountId);
     const [sortBy, setSortBy] = useState("Newest first");
     const [selectedId, setSelectedId] = useState(null);
+    useEffect(() => setAccountFilter(selectedAccountId), [selectedAccountId]);
     const selectedTransaction = transactions.find((item) => item.id === selectedId);
 
     const filtered = useMemo(() => transactions

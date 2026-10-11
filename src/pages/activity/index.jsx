@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FiArrowDownLeft, FiArrowUpRight, FiDownload, FiSearch, FiSliders, FiX } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
 import Dialog from "../../components/dialog";
@@ -7,15 +7,15 @@ import { downloadCsv } from "../../utils/downloadCsv";
 import { formatDate, formatMoney, formatSignedMoney } from "../../utils/format";
 import styles from "./styles.module.css";
 
-const ActivityPage = ({ accounts, onUpdateTransaction, selectedAccountId, transactions }) => {
+const ActivityPage = ({ accounts, onSelectAccount, onUpdateTransaction, selectedAccountId, transactions }) => {
     const [searchParams] = useSearchParams();
     const [query, setQuery] = useState(searchParams.get("search") || "");
     const [statusFilter, setStatusFilter] = useState("All status");
     const [categoryFilter, setCategoryFilter] = useState("All categories");
-    const [accountFilter, setAccountFilter] = useState(selectedAccountId);
+    const [allAccounts, setAllAccounts] = useState(false);
     const [sortBy, setSortBy] = useState("Newest first");
     const [selectedId, setSelectedId] = useState(null);
-    useEffect(() => setAccountFilter(selectedAccountId), [selectedAccountId]);
+    const accountFilter = allAccounts ? "all" : selectedAccountId;
     const selectedTransaction = transactions.find((item) => item.id === selectedId);
 
     const filtered = useMemo(() => transactions
@@ -38,7 +38,7 @@ const ActivityPage = ({ accounts, onUpdateTransaction, selectedAccountId, transa
         setQuery("");
         setStatusFilter("All status");
         setCategoryFilter("All categories");
-        setAccountFilter("all");
+        setAllAccounts(true);
         setSortBy("Newest first");
     };
 
@@ -83,7 +83,17 @@ const ActivityPage = ({ accounts, onUpdateTransaction, selectedAccountId, transa
                 </div>
                 <label className={styles.selectField}>
                     <span>Account</span>
-                    <select onChange={(event) => setAccountFilter(event.target.value)} value={accountFilter}>
+                    <select
+                        onChange={(event) => {
+                            if (event.target.value === "all") {
+                                setAllAccounts(true);
+                            } else {
+                                setAllAccounts(false);
+                                onSelectAccount(event.target.value);
+                            }
+                        }}
+                        value={accountFilter}
+                    >
                         <option value="all">All accounts</option>
                         {accounts.map((account) => <option key={account.id} value={account.id}>{account.name}</option>)}
                     </select>

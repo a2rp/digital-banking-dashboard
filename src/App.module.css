@@ -1,0 +1,37 @@
+﻿.app {
+    min-height: 100vh;
+    overflow: clip;
+    background: var(--color-background);
+}
+
+.main {
+    min-height: calc(100vh - 84px);
+    padding: 112px 0 72px;
+}
+
+.skipLink {
+    position: fixed;
+    z-index: 150;
+    top: 12px;
+    left: 12px;
+    padding: 11px 15px;
+    transform: translateY(-160%);
+    border: 1px solid var(--color-primary-dark);
+    border-radius: 10px;
+    color: white;
+    background: var(--color-primary-dark);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.skipLink:focus {
+    transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+    .main {
+        min-height: calc(100vh - 74px);
+        padding-top: 94px;
+        padding-bottom: 58px;
+    }
+}

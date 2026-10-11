@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useState } from "react";
 import { FiArrowDownLeft, FiArrowUpRight, FiEye, FiEyeOff, FiFileText, FiPlus, FiRepeat, FiTarget } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { downloadCsv } from "../../utils/downloadCsv";
@@ -14,21 +14,19 @@ const HomePage = ({ accounts, goals, onSelectAccount, selectedAccountId, totalBa
     const recentActivity = accountActivity.slice(0, 6);
     const topGoal = [...goals].sort((first, second) => (second.saved / second.target) - (first.saved / first.target))[0];
 
-    const week = useMemo(() => {
-        const today = new Date();
-        const days = Array.from({ length: 7 }, (_, index) => {
-            const date = new Date(today);
-            date.setDate(today.getDate() - (6 - index));
-            const iso = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString().slice(0, 10);
-            const items = accountActivity.filter((item) => item.date === iso);
-            return {
-                label: date.toLocaleDateString("en-US", { weekday: "short" }),
-                income: items.reduce((sum, item) => sum + Math.max(0, item.amount), 0),
-                spending: items.reduce((sum, item) => sum + Math.max(0, -item.amount), 0),
-            };
-        });
-        return { days, maximum: Math.max(...days.map((day) => Math.max(day.income, day.spending)), 1) };
-    }, [accountActivity]);
+    const today = new Date();
+    const days = Array.from({ length: 7 }, (_, index) => {
+        const date = new Date(today);
+        date.setDate(today.getDate() - (6 - index));
+        const iso = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString().slice(0, 10);
+        const items = accountActivity.filter((item) => item.date === iso);
+        return {
+            label: date.toLocaleDateString("en-US", { weekday: "short" }),
+            income: items.reduce((sum, item) => sum + Math.max(0, item.amount), 0),
+            spending: items.reduce((sum, item) => sum + Math.max(0, -item.amount), 0),
+        };
+    });
+    const week = { days, maximum: Math.max(...days.map((day) => Math.max(day.income, day.spending)), 1) };
 
     const exportStatement = () => {
         const rows = accountActivity.map((item) => [

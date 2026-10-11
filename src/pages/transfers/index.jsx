@@ -1,12 +1,11 @@
-﻿import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FiArrowDownLeft, FiArrowUpRight, FiCheckCircle, FiInfo, FiRepeat, FiShield } from "react-icons/fi";
 import ConfirmDialog from "../../components/confirmDialog";
 import { beneficiaries } from "../../data/seed";
 import { formatDate, formatMoney, formatSignedMoney } from "../../utils/format";
 import styles from "./styles.module.css";
 
-const TransfersPage = ({ accounts, selectedAccountId, transactions, transferMoney }) => {
-    const [fromAccountId, setFromAccountId] = useState(selectedAccountId);
+const TransfersPage = ({ accounts, onSelectAccount, selectedAccountId, transactions, transferMoney }) => {
     const [recipient, setRecipient] = useState("account:reserve");
     const [amount, setAmount] = useState("");
     const [note, setNote] = useState("");
@@ -14,9 +13,7 @@ const TransfersPage = ({ accounts, selectedAccountId, transactions, transferMone
     const [pendingTransfer, setPendingTransfer] = useState(null);
     const [confirmOpen, setConfirmOpen] = useState(false);
 
-    useEffect(() => setFromAccountId(selectedAccountId), [selectedAccountId]);
-
-    const fromAccount = accounts.find((account) => account.id === fromAccountId) || accounts[0];
+    const fromAccount = accounts.find((account) => account.id === selectedAccountId) || accounts[0];
     const recentTransfers = useMemo(() => transactions
         .filter((item) => item.category === "Transfer")
         .sort((first, second) => second.date.localeCompare(first.date))
@@ -39,7 +36,7 @@ const TransfersPage = ({ accounts, selectedAccountId, transactions, transferMone
         if (!target) nextErrors.recipient = "Choose a recipient.";
         if (!amount || !Number.isFinite(value) || value <= 0) nextErrors.amount = "Enter an amount greater than zero.";
         else if (value > fromAccount.available) nextErrors.amount = "The amount is above this account's available balance.";
-        if (target?.isInternal && target.accountId === fromAccountId) nextErrors.recipient = "Choose a different account.";
+        if (target?.isInternal && target.accountId === selectedAccountId) nextErrors.recipient = "Choose a different account.";
         setErrors(nextErrors);
         return Object.keys(nextErrors).length === 0;
     };
@@ -49,7 +46,7 @@ const TransfersPage = ({ accounts, selectedAccountId, transactions, transferMone
         if (!validate()) return;
         const target = resolveRecipient();
         setPendingTransfer({
-            fromAccountId,
+            fromAccountId: selectedAccountId,
             toAccountId: target.accountId,
             recipientName: target.name,
             amount: Number(amount),
@@ -92,7 +89,7 @@ const TransfersPage = ({ accounts, selectedAccountId, transactions, transferMone
                     <form onSubmit={handleContinue} noValidate>
                         <label className={styles.field}>
                             <span>From account</span>
-                            <select onChange={(event) => setFromAccountId(event.target.value)} value={fromAccountId}>
+                            <select onChange={(event) => onSelectAccount(event.target.value)} value={selectedAccountId}>
                                 {accounts.map((account) => (
                                     <option key={account.id} value={account.id}>
                                         {account.name} ···· {account.lastFour} · {formatMoney(account.available)}

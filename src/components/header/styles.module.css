@@ -1,0 +1,341 @@
+﻿.header {
+    position: fixed;
+    z-index: 50;
+    inset: 0 0 auto;
+    border-bottom: 1px solid rgb(211 222 239 / 84%);
+    background: rgb(249 251 255 / 94%);
+    backdrop-filter: blur(18px);
+    transition: transform 240ms ease;
+}
+
+.header[data-hidden="true"] {
+    transform: translateY(-100%);
+}
+
+.inner {
+    display: flex;
+    width: min(1480px, calc(100% - 56px));
+    min-height: 84px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-ink);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -.06em;
+}
+
+.brand img {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+}
+
+.brandDot {
+    color: var(--color-primary);
+}
+
+.accountPicker {
+    position: relative;
+    margin-left: auto;
+}
+
+.accountButton {
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    gap: 11px;
+    padding: 5px 12px 5px 7px;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    color: var(--color-ink);
+    background: transparent;
+    text-align: left;
+}
+
+.accountButton:hover {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    box-shadow: 0 5px 18px rgb(18 34 61 / 8%);
+}
+
+.accountIcon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 13px;
+    color: var(--color-primary);
+    background: #eaf0ff;
+}
+
+.accountIcon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.accountText {
+    display: grid;
+    gap: 1px;
+}
+
+.accountCaption {
+    color: var(--color-muted);
+    font-size: 13px;
+    line-height: 1.25;
+}
+
+.accountText strong {
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+}
+
+.accountText strong span {
+    color: var(--color-muted);
+    font-weight: 550;
+}
+
+.chevron,
+.chevronOpen {
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    color: var(--color-muted);
+    transition: rotate 160ms ease;
+}
+
+.chevronOpen {
+    rotate: 180deg;
+}
+
+.accountMenu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(350px, calc(100vw - 24px));
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-surface);
+    box-shadow: 0 22px 55px rgb(14 26 47 / 20%);
+    animation: menuIn 140ms ease both;
+}
+
+.menuTitle {
+    padding: 7px 10px 11px;
+    color: var(--color-muted);
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: .03em;
+}
+
+.accountOption,
+.accountOptionActive {
+    display: flex;
+    width: 100%;
+    min-height: 66px;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 13px;
+    color: var(--color-ink);
+    background: transparent;
+    text-align: left;
+}
+
+.accountOption:hover,
+.accountOptionActive {
+    border-color: #d9e3ff;
+    background: #f2f5ff;
+    box-shadow: none;
+}
+
+.optionText {
+    display: grid;
+    flex: 1;
+    gap: 3px;
+}
+
+.optionText strong {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.optionText span,
+.optionBalance {
+    color: var(--color-muted);
+    font-size: 13px;
+}
+
+.optionBalance {
+    color: var(--color-ink);
+    font-weight: 650;
+}
+
+.optionCheck {
+    width: 16px;
+    height: 16px;
+    color: var(--color-primary);
+}
+
+.helpButton {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 9px;
+    padding: 0 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 13px;
+    color: var(--color-ink-soft);
+    background: var(--color-surface);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.helpButton svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+}
+
+.helpButton:hover {
+    border-color: #afc2f5;
+    color: var(--color-ink);
+    box-shadow: 0 6px 18px rgb(18 34 61 / 10%);
+}
+
+.helpContent {
+    display: grid;
+    gap: 15px;
+}
+
+.helpContent p {
+    color: var(--color-ink-soft);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.helpDone {
+    min-height: 46px;
+    justify-self: end;
+    margin-top: 5px;
+    padding: 0 20px;
+    border: 1px solid var(--color-primary);
+    border-radius: 12px;
+    color: white;
+    background: var(--color-primary);
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.helpDone:hover {
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 7px 18px rgb(52 91 215 / 22%);
+}
+
+@keyframes menuIn {
+    from { opacity: 0; translate: 0 -4px; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+@media (max-width: 700px) {
+    .inner {
+        width: calc(100% - 30px);
+        min-height: 74px;
+        gap: 8px;
+    }
+
+    .brand {
+        gap: 7px;
+        font-size: 20px;
+    }
+
+    .brand img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .accountButton {
+        min-height: 48px;
+        gap: 8px;
+        padding-inline: 5px;
+    }
+
+    .accountIcon {
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+    }
+
+    .accountText strong {
+        max-width: 145px;
+        overflow: hidden;
+        font-size: 13px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .accountCaption {
+        display: none;
+    }
+
+    .accountText strong span {
+        font-size: 13px;
+    }
+
+    .helpButton {
+        width: 42px;
+        min-height: 42px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .helpButton span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 390px) {
+    .inner {
+        width: calc(100% - 22px);
+        gap: 5px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .brand img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .accountText strong {
+        max-width: 115px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header,
+    .chevron,
+    .chevronOpen,
+    .accountMenu {
+        transition-duration: 1ms;
+        animation-duration: 1ms;
+    }
+}

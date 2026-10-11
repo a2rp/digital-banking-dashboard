@@ -1,0 +1,92 @@
+﻿.toast {
+    position: fixed;
+    z-index: 120;
+    right: max(22px, calc((100vw - 1440px) / 2));
+    bottom: 102px;
+    display: flex;
+    width: min(440px, calc(100vw - 32px));
+    min-height: 62px;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    box-shadow: 0 14px 38px rgb(11 21 40 / 18%);
+    animation: toastIn 180ms ease both;
+}
+
+.icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 11px;
+    color: #187761;
+    background: #e8f7f2;
+}
+
+.icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.toast[data-type="error"] .icon {
+    color: #a7404d;
+    background: #fff0f1;
+}
+
+.toast[data-type="info"] .icon {
+    color: var(--color-primary);
+    background: #eaf0ff;
+}
+
+.toast p {
+    flex: 1;
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+.closeButton {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: var(--color-muted);
+    background: transparent;
+}
+
+.closeButton svg {
+    width: 16px;
+    height: 16px;
+}
+
+.closeButton:hover {
+    border-color: var(--color-border);
+    box-shadow: 0 4px 12px rgb(17 33 59 / 10%);
+}
+
+@keyframes toastIn {
+    from { opacity: 0; translate: 0 8px; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+@media (max-width: 560px) {
+    .toast {
+        right: 12px;
+        bottom: 96px;
+        width: calc(100vw - 24px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        animation-duration: 1ms;
+    }
+}

@@ -1,0 +1,79 @@
+.confirmation {
+    display: grid;
+    gap: 24px;
+}
+
+.icon {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border-radius: 15px;
+    color: #9a414f;
+    background: #fff0f1;
+}
+
+.icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.primary {
+    color: #294fc2;
+    background: #eaf0ff;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.actions button {
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.cancelButton {
+    border-color: var(--color-border) !important;
+    color: var(--color-ink);
+    background: var(--color-surface);
+}
+
+.cancelButton:hover {
+    box-shadow: 0 5px 14px rgb(19 34 58 / 11%);
+}
+
+.dangerButton {
+    color: white;
+    background: #a7404d;
+}
+
+.dangerButton:hover {
+    border-color: #893541;
+    box-shadow: 0 6px 18px rgb(167 64 77 / 22%);
+}
+
+.primaryButton {
+    color: white;
+    background: var(--color-primary);
+}
+
+.primaryButton:hover {
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 6px 18px rgb(52 91 215 / 24%);
+}
+
+@media (max-width: 430px) {
+    .actions {
+        flex-direction: column-reverse;
+    }
+
+    .actions button {
+        width: 100%;
+    }
+}

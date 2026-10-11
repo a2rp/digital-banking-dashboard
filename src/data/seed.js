@@ -1,4 +1,4 @@
-export const initialAccounts = [
+﻿export const initialAccounts = [
     {
         id: "everyday",
         name: "Everyday checking",
@@ -13,8 +13,8 @@ export const initialAccounts = [
         name: "High-yield reserve",
         type: "Savings",
         lastFour: "1937",
-        balance: 13875.42,
-        available: 13875.42,
+        balance: 18875.42,
+        available: 18875.42,
         color: "violet",
     },
     {
@@ -57,9 +57,9 @@ export const initialGoals = [
 ];
 
 export const beneficiaries = [
-    { id: "maya", name: "Maya Chen", detail: "Cedar Bank ···· 7814", initials: "MC" },
-    { id: "jonah", name: "Jonah Miles", detail: "Union Federal ···· 2049", initials: "JM" },
-    { id: "home", name: "Rent and home", detail: "Saved payment ···· 8820", initials: "RH" },
+    { id: "maya", name: "Maya Chen", detail: "Cedar Bank Â·Â·Â·Â· 7814", initials: "MC" },
+    { id: "jonah", name: "Jonah Miles", detail: "Union Federal Â·Â·Â·Â· 2049", initials: "JM" },
+    { id: "home", name: "Rent and home", detail: "Saved payment Â·Â·Â·Â· 8820", initials: "RH" },
 ];
 
 export const transactionCategories = [

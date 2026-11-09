@@ -20,6 +20,12 @@ export const formatDate = (value) => {
     return dateFormatter.format(new Date(`${value}T12:00:00`));
 };
 
-export const todayAsISO = () => new Date().toISOString().slice(0, 10);
+export const todayAsISO = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+};
 
 export const makeId = (prefix) => `${prefix}-${Date.now()}-${Math.floor(Math.random() * 1000)}`;

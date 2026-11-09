@@ -1,6 +1,9 @@
-﻿const csvValue = (value) => {
+const csvValue = (value) => {
     const text = String(value ?? "");
-    return '"' + text.replaceAll('"', '""') + '"';
+    const safeText = typeof value === "string" && ["=", "+", "-", "@"].includes(text.trimStart()[0])
+        ? `'${text}`
+        : text;
+    return '"' + safeText.replaceAll('"', '""') + '"';
 };
 
 export const downloadCsv = (filename, headers, rows) => {
